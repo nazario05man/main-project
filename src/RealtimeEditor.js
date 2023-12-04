@@ -6,13 +6,13 @@ const RealtimeEditor = () => {
   const [socketConnection, setSocketConnection] = useState(null);
 
   useEffect(() => {
-    // Встановлюємо підключення при завантаженні компонента
-    setSocketConnection(socketIOClient(window.location.origin));
+    const socket = socketIOClient(window.location.origin);
+    setSocketConnection(socket);
 
     return () => {
       // Закриваємо підключення при виході з компонента
-      if (socketConnection) {
-        socketConnection.disconnect();
+      if (socket) {
+        socket.disconnect();
       }
     };
   }, []);
